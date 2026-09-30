@@ -395,18 +395,28 @@ textarea{min-height:80px;resize:vertical}
   let musicPlaying = false;
 
   function createMusicFrame(){
-    if(musicFrame) return;
-    musicFrame = document.createElement('iframe');
-    musicFrame.className = 'music-frame';
-    musicFrame.setAttribute('title', 'Música');
-    musicFrame.setAttribute('allow', 'autoplay; encrypted-media; picture-in-picture');
-    musicFrame.setAttribute('allowfullscreen', '');
-    musicFrame.src =
-      'https://www.youtube.com/embed/yd8jh9QYfEs' +
-      '?autoplay=1&controls=0&start=58&playsinline=1&rel=0&modestbranding=1';
-    document.body.appendChild(musicFrame);
-    musicPlaying = true;
-    musicButton.setAttribute('aria-label','Pausar canción');
+  musicPanel.classList.add('open');
+  musicStatus.textContent = 'Tocá ▶ para reproducir la canción.';
+
+  if(musicFrame) return;
+
+  musicFrame = document.createElement('iframe');
+  musicFrame.className = 'music-frame';
+  musicFrame.title = "Don't Stop The Music · Rihanna";
+  musicFrame.setAttribute(
+    'allow',
+    'autoplay; encrypted-media; picture-in-picture; fullscreen'
+  );
+  musicFrame.setAttribute('allowfullscreen', '');
+  musicFrame.setAttribute('playsinline', '1');
+
+  musicFrame.src =
+    'https://www.youtube-nocookie.com/embed/yd8jh9QYfEs' +
+    '?controls=1&start=58&playsinline=1&rel=0';
+
+  document.getElementById('musicFrame').appendChild(musicFrame);
+
+  musicButton.setAttribute('aria-label','Cerrar música');
   }
 
   musicButton.addEventListener('click', function(){
